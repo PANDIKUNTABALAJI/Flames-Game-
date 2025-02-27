@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FLAMES Game</title>
+  <style>
+    /* ---------------------------------------
+       1. RESET & BASIC STYLING
+    --------------------------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #fda085, #f6d365);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      padding: 20px;
+    }
+
+    /* ---------------------------------------
+       2. WELCOME HEADER (Animated)
+    --------------------------------------- */
+    .welcome-header {
+      font-size: 2.5rem;
+      color: #ff4f81;
+      text-align: center;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeInDown 1.5s forwards;
+    }
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(-10px);
+      }
+    }
+
+    /* ---------------------------------------
+       3. WRAPPER FOR BOXES
+    --------------------------------------- */
+    .wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 1000px;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    /* ---------------------------------------
+       4. RULES BOX (Smaller, Slide in from Left)
+    --------------------------------------- */
+    .rules-box {
+      flex: 1 1 30%;
+      min-width: 280px;
+      max-width: 400px;
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      position: relative;
+      transform: translateX(-100%);
+      animation: slideInLeft 1s forwards;
+    }
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+    .rules-box h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #ff4f81;
+    }
+    .rules-box ol {
+      list-style: decimal inside;
+      line-height: 1.8;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    /* ---------------------------------------
+       5. GAME BOX (Larger, Slide in from Right)
+    --------------------------------------- */
+    .game-box {
+      flex: 1 1 70%;
+      min-width: 280px;
+      max-width: 600px;
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(100%);
+      animation: slideInRight 1s forwards;
+    }
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+    .game-box h1 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      color: #ff4f81;
+    }
+    .game-box input {
+      width: 80%;
+      max-width: 300px;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background: #fff;
+      color: #333;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .game-box button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #ff4f81;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 79, 129, 0.5);
+    }
+    .game-box button:hover {
+      background: #ff1c55;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #ff4f81;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* ---------------------------------------
+       6. FOOTER (Contact Info)
+    --------------------------------------- */
+    .footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 1rem;
+      color: #ff4f81;
+    }
+    .footer p {
+      margin: 5px 0;
+    }
+    /* Extra space for the "Developed By" message */
+    .footer p.developer {
+      margin-top: 10px;
+    }
+
+    /* ---------------------------------------
+       7. RESPONSIVE DESIGN
+    --------------------------------------- */
+    @media (max-width: 768px) {
+      .rules-box, .game-box {
+        flex: 1 1 100%;
+        max-width: 100%;
+        transform: none;
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Welcome Header -->
+  <header class="welcome-header">!...WELCOME TO THE FLAMES GAME...!</header>
+
+  <!-- Wrapper for Rules and Game Boxes -->
+  <div class="wrapper">
+    <!-- Rules Box -->
+    <div class="rules-box">
+      <h2>How to Play FLAMES</h2>
+      <ol>
+        <li>Enter two names in the text fields.</li>
+        <li>Click the "Find Relationship" button.</li>
+        <li>The game removes common letters in both names.</li>
+        <li>Counts the remaining letters.</li>
+        <li>Uses the count to determine the relationship.</li>
+        <li>Enjoy the final result with music! 🎶</li>
+      </ol>
+    </div>
+
+    <!-- Game Box -->
+    <div class="game-box">
+      <h1>FLAMES 🔥</h1>
+      <input type="text" id="player1" placeholder="Enter Player 1 Name">
+      <input type="text" id="player2" placeholder="Enter Player 2 Name">
+      <button onclick="calculateFLAMES()">Find Relationship</button>
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <!-- Footer with Contact Information -->
+  <footer class="footer">
+    <p>📞 CUSTOMER SUPPORT: 9392464958</p>
+    <p>✉️ Gmail: balajipandikunta93@gamail.com</p>
+    <p class="developer">Developed By : PANDIKUNATA BALAJI</p>
+  </footer>
+
+  <!-- Audio Element for Final Result Music -->
+  <audio id="resultMusic">
+    <source src="https://www.fesliyanstudios.com/play-mp3/4381" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function calculateFLAMES() {
+      const p1 = document.getElementById("player1").value.trim().toLowerCase().replace(/\s/g, "");
+      const p2 = document.getElementById("player2").value.trim().toLowerCase().replace(/\s/g, "");
+      const resultDiv = document.getElementById("result");
+      const music = document.getElementById("resultMusic");
+
+      if (!p1 || !p2) {
+        resultDiv.innerText = "Please enter both names!";
+        return;
+      }
+
+      // Remove matching letters
+      let arr1 = p1.split("");
+      let arr2 = p2.split("");
+      let i = 0;
+      while (i < arr1.length) {
+        if (arr2.includes(arr1[i])) {
+          let idx = arr2.indexOf(arr1[i]);
+          arr2.splice(idx, 1);
+          arr1.splice(i, 1);
+          i = 0;
+        } else {
+          i++;
+        }
+      }
+
+      // Count remaining letters
+      let count = arr1.length + arr2.length;
+
+      // FLAMES logic
+      let flames = ["Friends", "Love", "Affection", "Marriage", "Enemy", "Siblings"];
+      while (flames.length > 1) {
+        let splitIndex = (count % flames.length) - 1;
+        if (splitIndex >= 0) {
+          flames = flames.slice(splitIndex + 1).concat(flames.slice(0, splitIndex));
+        } else {
+          flames.pop();
+        }
+      }
+
+      let finalRelationship = flames[0];
+      resultDiv.innerHTML = `Relationship Status: ${finalRelationship}<br>Thank you..!`;
+
+      // Play music when the final result is displayed
+      music.currentTime = 0;
+      music.play().catch(err => console.log("Audio playback failed:", err));
+    }
+  </script>
+</body>
+</html>
